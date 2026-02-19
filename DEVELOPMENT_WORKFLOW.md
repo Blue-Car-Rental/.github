@@ -52,17 +52,23 @@ These rules are enforced at the repository level. They are not optional.
 
 ---
 
-## Why This Matters
+## Our Philosophy
 
-Our team writes code with the help of AI tools. This is a strength -- it lets us move quickly and tackle problems that would otherwise require a larger engineering team. But it also means that the code we produce has not always been written line-by-line by a human who fully understands every detail.
+Code is cheap now. Anyone on the team can build something with AI, and if those solutions benefit the company, that is fantastic. We encourage it.
 
-The review gate exists to catch issues before they reach production. When Gudmundur reviews a Pull Request, he is checking for:
+But what our customers see must work. Every time.
 
-- **Correctness.** Does the code do what it is supposed to do?
-- **Security.** Does it introduce any vulnerabilities or expose sensitive data?
-- **Stability.** Could it break something that is already working?
-- **Quality.** Is the code maintainable and understandable?
+The ability to write code quickly does not remove the need for careful judgment about what goes live. A broken feature, a security gap, or a bad deploy costs more than the time it takes to review a Pull Request. Our job is not to slow things down -- it is to make sure we ship with confidence.
 
-This single approval step is the most important part of our process. It is the line between "work in progress" and "live in production." Skipping it, or rushing through it, puts the business at risk.
+## Why the Review Gate Exists
 
-Take the review process seriously. Write clear PR descriptions. Respond to feedback promptly. The goal is not to slow things down -- it is to ship with confidence.
+The review gate is how we balance speed with safety. Before anything reaches production, it must pass through a human review. When Gudmundur reviews a Pull Request, he is checking for:
+
+- **Does it work?** The change should do what it claims to do.
+- **Is it safe?** No vulnerabilities, no exposed secrets, no data leaks.
+- **Does it break anything?** The most important question. What our users rely on today must keep working tomorrow.
+- **Is it understandable?** If no one can read it six months from now, it becomes a liability.
+
+This single approval step is the line between "work in progress" and "live in production." It protects our customers and it protects the business.
+
+Take the review process seriously. Write clear PR descriptions. Respond to feedback promptly. Build fast, but ship safely.
