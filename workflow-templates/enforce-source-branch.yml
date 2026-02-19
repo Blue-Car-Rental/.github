@@ -9,12 +9,12 @@ jobs:
   check-source-branch:
     runs-on: ubuntu-latest
     steps:
-      - name: Verify PR originates from test branch
-        if: github.head_ref != 'test'
+      - name: Verify PR originates from staging branch
+        if: github.head_ref != 'staging'
         run: |
-          echo "::error::PRs to main must come from the test branch. Please merge your changes into test first, then open a PR from test to main."
+          echo "::error::PRs to main must come from the staging branch. Please merge your changes into staging first, then open a PR from staging to main."
           exit 1
 
       - name: Source branch verified
-        if: github.head_ref == 'test'
-        run: echo "Source branch is 'test'. Check passed."
+        if: github.head_ref == 'staging'
+        run: echo "Source branch is 'staging'. Check passed."

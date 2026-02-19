@@ -27,7 +27,7 @@ We use two branches. Think of them as two environments: one for work-in-progress
 
 | Branch | Purpose | Who can push | Deploys to |
 |--------|---------|-------------|------------|
-| `test` | Development and testing | Everyone | Nothing (safe to experiment) |
+| `staging` | Development and testing | Everyone | Nothing (safe to experiment) |
 | `main` | Production | No one directly (PR only) | Live application |
 
 ---
@@ -36,7 +36,7 @@ We use two branches. Think of them as two environments: one for work-in-progress
 
 ```mermaid
 flowchart LR
-    A["Work on **test** branch"] --> B["Open PR: test → main"]
+    A["Work on **staging** branch"] --> B["Open PR: staging → main"]
     B --> C{"Review & Approval"}
     C -->|Approved| D["Merge to **main**"]
     C -->|Changes needed| A
@@ -49,13 +49,13 @@ flowchart LR
     style E fill:#00143B,color:#F8F8F8,stroke:#00143B
 ```
 
-### 1. Do Your Work on `test`
+### 1. Do Your Work on `staging`
 
-Write your code and make your changes on the `test` branch. You can also create a feature branch off of `test` if you prefer to work in isolation, then merge it back into `test` when you are done.
+Write your code and make your changes on the `staging` branch. You can also create a feature branch off of `staging` if you prefer to work in isolation, then merge it back into `staging` when you are done.
 
-### 2. Open a Pull Request from `test` to `main`
+### 2. Open a Pull Request from `staging` to `main`
 
-When your changes on `test` are working correctly and ready for production, open a Pull Request (PR) targeting `main`. In the PR description, explain what the changes do and why they are being made.
+When your changes on `staging` are working correctly and ready for production, open a Pull Request (PR) targeting `main`. In the PR description, explain what the changes do and why they are being made.
 
 ### 3. Review and Approval
 
