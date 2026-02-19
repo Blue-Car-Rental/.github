@@ -1,0 +1,4 @@
+{
+  "name": "Enforce source branch",
+  "description": "Requires that pull requests to main originate from the test branch"
+}
