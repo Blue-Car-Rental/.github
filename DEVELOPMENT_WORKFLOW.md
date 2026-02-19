@@ -1,6 +1,23 @@
-# Development Workflow
+<p align="center">
+  <img src="assets/blue-logo.png" alt="Blue Car Rental" width="120">
+</p>
 
-This document describes how we build, test, and ship software at Blue Car Rental. It is written for everyone on the team, regardless of technical background.
+<h1 align="center">Development Workflow</h1>
+
+<p align="center">
+  How we build, test, and ship software at Blue Car Rental.<br>
+  Written for everyone on the team, regardless of technical background.
+</p>
+
+---
+
+## Our Philosophy
+
+Code is cheap now. Anyone on the team can build something with AI, and if those solutions benefit the company, that is fantastic. We encourage it.
+
+But what our customers see must work. **Every time.**
+
+The ability to write code quickly does not remove the need for careful judgment about what goes live. A broken feature, a security gap, or a bad deploy costs more than the time it takes to review a Pull Request. Our job is not to slow things down -- it is to make sure we ship with confidence.
 
 ---
 
@@ -8,19 +25,29 @@ This document describes how we build, test, and ship software at Blue Car Rental
 
 We use two branches. Think of them as two environments: one for work-in-progress and one for what our customers actually use.
 
-### `test` -- The Development Branch
-
-This is where all day-to-day work happens. Code is written, tested, and iterated on here. It is safe to experiment -- nothing on `test` affects the live application.
-
-### `main` -- The Production Branch
-
-What is on `main` is what is live and deployed. This branch represents exactly what our customers see and use. Changes only reach `main` after they have been reviewed and approved.
+| Branch | Purpose | Who can push | Deploys to |
+|--------|---------|-------------|------------|
+| `test` | Development and testing | Everyone | Nothing (safe to experiment) |
+| `main` | Production | No one directly (PR only) | Live application |
 
 ---
 
 ## Workflow
 
-Follow these steps to get your work from development to production.
+```mermaid
+flowchart LR
+    A["Work on **test** branch"] --> B["Open PR: test → main"]
+    B --> C{"Review & Approval"}
+    C -->|Approved| D["Merge to **main**"]
+    C -->|Changes needed| A
+    D --> E["Auto-deploy"]
+
+    style A fill:#1B56FD,color:#F8F8F8,stroke:#00143B
+    style B fill:#1B56FD,color:#F8F8F8,stroke:#00143B
+    style C fill:#FD6112,color:#F8F8F8,stroke:#00143B
+    style D fill:#1B56FD,color:#F8F8F8,stroke:#00143B
+    style E fill:#00143B,color:#F8F8F8,stroke:#00143B
+```
 
 ### 1. Do Your Work on `test`
 
@@ -42,7 +69,8 @@ Once the PR is approved, it gets merged into `main`. The application automatical
 
 ## Rules
 
-These rules are enforced at the repository level. They are not optional.
+> [!IMPORTANT]
+> These rules are enforced at the repository level. They are not optional.
 
 - **No direct pushes to `main`.** All changes to `main` must go through a Pull Request. No exceptions.
 - **PRs to `main` require at least one approval.** A Pull Request cannot be merged until it has been reviewed and approved.
@@ -52,23 +80,18 @@ These rules are enforced at the repository level. They are not optional.
 
 ---
 
-## Our Philosophy
+## What the Reviewer Checks
 
-Code is cheap now. Anyone on the team can build something with AI, and if those solutions benefit the company, that is fantastic. We encourage it.
+> [!NOTE]
+> The review gate is how we balance speed with safety. Before anything reaches production, it must pass through a human review.
 
-But what our customers see must work. Every time.
-
-The ability to write code quickly does not remove the need for careful judgment about what goes live. A broken feature, a security gap, or a bad deploy costs more than the time it takes to review a Pull Request. Our job is not to slow things down -- it is to make sure we ship with confidence.
-
-## Why the Review Gate Exists
-
-The review gate is how we balance speed with safety. Before anything reaches production, it must pass through a human review. When Gudmundur reviews a Pull Request, he is checking for:
-
-- **Does it work?** The change should do what it claims to do.
-- **Is it safe?** No vulnerabilities, no exposed secrets, no data leaks.
-- **Does it break anything?** The most important question. What our users rely on today must keep working tomorrow.
-- **Is it understandable?** If no one can read it six months from now, it becomes a liability.
+| Check | Question |
+|-------|----------|
+| **Correctness** | Does the change do what it claims to do? |
+| **Security** | No vulnerabilities, no exposed secrets, no data leaks? |
+| **Stability** | Does it break anything users already rely on? |
+| **Readability** | Can someone understand this six months from now? |
 
 This single approval step is the line between "work in progress" and "live in production." It protects our customers and it protects the business.
 
-Take the review process seriously. Write clear PR descriptions. Respond to feedback promptly. Build fast, but ship safely.
+Build fast, but ship safely.
